@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as YearlyRouteImport } from './routes/yearly'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as IndexRouteImport } from './routes/index'
 
+const YearlyRoute = YearlyRouteImport.update({
+  id: '/yearly',
+  path: '/yearly',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeetingsRoute = MeetingsRouteImport.update({
   id: '/meetings',
   path: '/meetings',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/yearly': typeof YearlyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/yearly': typeof YearlyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/yearly': typeof YearlyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/meetings'
+  fullPaths: '/' | '/calendar' | '/meetings' | '/yearly'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/meetings'
-  id: '__root__' | '/' | '/calendar' | '/meetings'
+  to: '/' | '/calendar' | '/meetings' | '/yearly'
+  id: '__root__' | '/' | '/calendar' | '/meetings' | '/yearly'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   MeetingsRoute: typeof MeetingsRoute
+  YearlyRoute: typeof YearlyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/yearly': {
+      id: '/yearly'
+      path: '/yearly'
+      fullPath: '/yearly'
+      preLoaderRoute: typeof YearlyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/meetings': {
       id: '/meetings'
       path: '/meetings'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   MeetingsRoute: MeetingsRoute,
+  YearlyRoute: YearlyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
