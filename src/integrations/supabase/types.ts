@@ -14,7 +14,165 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      meeting_tasks: {
+        Row: {
+          action_required: string | null
+          created_at: string
+          date: string | null
+          follow_up_date: string | null
+          id: number
+          key_points: string | null
+          meeting_with: string | null
+          purpose: string | null
+          remarks: string | null
+          responsible_id: number | null
+          status: string
+          task_type: string
+          updated_at: string
+        }
+        Insert: {
+          action_required?: string | null
+          created_at?: string
+          date?: string | null
+          follow_up_date?: string | null
+          id: number
+          key_points?: string | null
+          meeting_with?: string | null
+          purpose?: string | null
+          remarks?: string | null
+          responsible_id?: number | null
+          status?: string
+          task_type?: string
+          updated_at?: string
+        }
+        Update: {
+          action_required?: string | null
+          created_at?: string
+          date?: string | null
+          follow_up_date?: string | null
+          id?: number
+          key_points?: string | null
+          meeting_with?: string | null
+          purpose?: string | null
+          remarks?: string | null
+          responsible_id?: number | null
+          status?: string
+          task_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: number
+          name: string
+          role: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: number
+          name: string
+          role?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: number
+          name?: string
+          role?: string | null
+        }
+        Relationships: []
+      }
+      weekly_planner: {
+        Row: {
+          assigned_to_id: number | null
+          assigned_to_name: string | null
+          created_at: string
+          date: string | null
+          day: string | null
+          focus_area: string | null
+          id: number
+          notes: string | null
+          priority: string | null
+          status: string
+          task: string | null
+          week: string | null
+        }
+        Insert: {
+          assigned_to_id?: number | null
+          assigned_to_name?: string | null
+          created_at?: string
+          date?: string | null
+          day?: string | null
+          focus_area?: string | null
+          id: number
+          notes?: string | null
+          priority?: string | null
+          status?: string
+          task?: string | null
+          week?: string | null
+        }
+        Update: {
+          assigned_to_id?: number | null
+          assigned_to_name?: string | null
+          created_at?: string
+          date?: string | null
+          day?: string | null
+          focus_area?: string | null
+          id?: number
+          notes?: string | null
+          priority?: string | null
+          status?: string
+          task?: string | null
+          week?: string | null
+        }
+        Relationships: []
+      }
+      yearly_calendar: {
+        Row: {
+          activity: string | null
+          category: string | null
+          created_at: string
+          end_date: string | null
+          id: number
+          month: string | null
+          remarks: string | null
+          responsible_id: number | null
+          responsible_name: string | null
+          start_date: string | null
+          status: string
+        }
+        Insert: {
+          activity?: string | null
+          category?: string | null
+          created_at?: string
+          end_date?: string | null
+          id: number
+          month?: string | null
+          remarks?: string | null
+          responsible_id?: number | null
+          responsible_name?: string | null
+          start_date?: string | null
+          status?: string
+        }
+        Update: {
+          activity?: string | null
+          category?: string | null
+          created_at?: string
+          end_date?: string | null
+          id?: number
+          month?: string | null
+          remarks?: string | null
+          responsible_id?: number | null
+          responsible_name?: string | null
+          start_date?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
