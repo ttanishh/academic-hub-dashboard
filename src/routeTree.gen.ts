@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as YearlyRouteImport } from './routes/yearly'
+import { Route as WeeklyRouteImport } from './routes/weekly'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const YearlyRoute = YearlyRouteImport.update({
   id: '/yearly',
   path: '/yearly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyRoute = WeeklyRouteImport.update({
+  id: '/weekly',
+  path: '/weekly',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingsRoute = MeetingsRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/weekly': typeof WeeklyRoute
   '/yearly': typeof YearlyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/weekly': typeof WeeklyRoute
   '/yearly': typeof YearlyRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/meetings': typeof MeetingsRoute
+  '/weekly': typeof WeeklyRoute
   '/yearly': typeof YearlyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calendar' | '/meetings' | '/yearly'
+  fullPaths: '/' | '/calendar' | '/meetings' | '/weekly' | '/yearly'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calendar' | '/meetings' | '/yearly'
-  id: '__root__' | '/' | '/calendar' | '/meetings' | '/yearly'
+  to: '/' | '/calendar' | '/meetings' | '/weekly' | '/yearly'
+  id: '__root__' | '/' | '/calendar' | '/meetings' | '/weekly' | '/yearly'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   MeetingsRoute: typeof MeetingsRoute
+  WeeklyRoute: typeof WeeklyRoute
   YearlyRoute: typeof YearlyRoute
 }
 
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/yearly'
       fullPath: '/yearly'
       preLoaderRoute: typeof YearlyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly': {
+      id: '/weekly'
+      path: '/weekly'
+      fullPath: '/weekly'
+      preLoaderRoute: typeof WeeklyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meetings': {
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   MeetingsRoute: MeetingsRoute,
+  WeeklyRoute: WeeklyRoute,
   YearlyRoute: YearlyRoute,
 }
 export const routeTree = rootRouteImport
